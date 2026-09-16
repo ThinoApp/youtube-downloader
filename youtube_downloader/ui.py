@@ -195,7 +195,7 @@ class MainWindow(QMainWindow):
         settings_group = QGroupBox("Téléchargement")
         settings_layout = QFormLayout(settings_group)
         self.format_combo = QComboBox()
-        self.format_combo.addItem("MP4 — vidéo", "mp4")
+        self.format_combo.addItem("MP4 — compatible QuickTime (H.264 + AAC)", "mp4")
         self.format_combo.addItem("WebM — vidéo", "webm")
         self.format_combo.addItem("MP3 — audio", "mp3")
         self.format_combo.addItem("M4A — audio", "m4a")

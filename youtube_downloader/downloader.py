@@ -96,9 +96,13 @@ def _video_format(output_format: str, quality: int | None) -> str:
             f"bv*{height}[ext=webm]+ba[ext=webm]/"
             f"b{height}[ext=webm]/b{height}/best"
         )
+
+    # A .mp4 extension alone does not guarantee QuickTime compatibility.
+    # Explicitly request H.264/AVC video + AAC audio. Do not fall back to a
+    # generic MP4/best selector because YouTube may then return AV1 or VP9.
     return (
-        f"bv*{height}[ext=mp4]+ba[ext=m4a]/"
-        f"b{height}[ext=mp4]/b{height}/best"
+        f"bv[ext=mp4][vcodec^=avc1]{height}+ba[ext=m4a][acodec^=mp4a]/"
+        f"b[ext=mp4][vcodec^=avc1][acodec^=mp4a]{height}"
     )
 
 
